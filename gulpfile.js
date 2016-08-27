@@ -4,10 +4,13 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')(); //lazy load some of gulp plugins
 
 var watch = require('gulp-watch');
+var posthtml = require('gulp-posthtml');
 
 var devMode = process.env.NODE_ENV || 'dev';
 
 var destFolder = devMode === 'dev' ? 'dev' : 'production';
+
+var cssPrefix = 'fnlasdnf-';
 
 // STYLES
 gulp.task('sass', function () {
@@ -16,7 +19,7 @@ gulp.task('sass', function () {
 		.pipe($.if(devMode !== 'prod', $.sourcemaps.init())) 
 		.pipe($.sass({outputStyle: 'expanded'})) 
 		.on('error', $.notify.onError())
-		.pipe($.cssPrefix('you-seagate-'))
+		.pipe($.cssPrefix(cssPrefix))
 		.on('error', $.notify.onError())
 		.pipe($.autoprefixer({
 			browsers: ['> 1%'],
@@ -35,6 +38,30 @@ gulp.task('assets', function(){
 });
 
 // HTML
+
+var postHtmlPlugins = [
+	function prefixClass(tree) {
+		tree.match({attrs: { class: /.+/ }}, function (node) {
+			
+			var classes = node.attrs.class.split(' ');	
+
+			var newClasses = classes.map( className => cssPrefix + className);
+			
+			node.attrs.class = newClasses.join(' ');
+
+			return node;
+		});
+	},	
+	function prefixId(tree) {
+		tree.match({attrs: { id: /.+/ }}, function (node) {
+		
+			node.attrs.id = cssPrefix + node.attrs.id;
+
+			return node;
+		});
+	},	
+];
+
 gulp.task('html', function(callback){
 	
 	return gulp.src([
@@ -48,9 +75,12 @@ gulp.task('html', function(callback){
 		indent: true
 	}))
 	.on('error', $.notify.onError())
+	.pipe(posthtml(postHtmlPlugins))
+	.on('error', $.notify.onError())
 	.pipe(gulp.dest(destFolder));
 
 });
+
 
 // JS
 gulp.task('js', function(){
