@@ -26,15 +26,14 @@
 		}
 	}
 
-
-	&--color{
-		background: #000;
-		color: #fff;
+	&--green{
+		background: $green;
+		color: #231522!important;
 		&:hover{
-			background: lighten(#000, 5%);
+			background: lighten($green, 5%);
 		}
 		&:active{
-			background: darken(#000, 5%);
+			background: darken($green, 5%);
 		}
 	}
 
@@ -76,16 +75,6 @@
 
 	&__input-placeholder{
 		position: relative;
-		margin-bottom: 16px;
-
-		&--inline{
-			width: 48%;
-			float: right;
-			margin-bottom: 0;
-			&:first-child{
-				float: left;
-			}
-		}
 	}
 
 	label.error{
@@ -111,46 +100,15 @@
 	&__input,
 	&__textarea{
 		-webkit-appearance: none;
-		padding: 0 0 0 20px;
+		padding: 0 0 0 15px;
 		width: 100%;
 		outline: none;
-		border: 1px solid #d7d7d7;
 		max-width: 100%;
-		font-size: 15px;
 		font-family: $mainFontFamily;
-		background: #f6f5f1;
-		border-radius: 5px;
-		box-shadow: inset 0 2px 3px rgba(0,0,0,.13); 
 		&.error{
 			border-color: #ef6d51;
 		}
 	}
-	&__input{
-		&--h40{
-			height: 40px;
-			line-height: 40px;
-		}
-	}
-	&__textarea{
-		padding-top: 10px;
-		height: 210px;
-		&--h120{
-			height: 120px;
-		}
-	}
 }
 
 
-/* ==========================================================================
- * checkbox
- * ========================================================================== */
-
-.checkbox{
-	display: inline-block;
-	position: relative;
-
-	&__input{
-		margin: -2px 0 0;
-
-	}
-}

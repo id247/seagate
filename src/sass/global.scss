@@ -23,6 +23,13 @@
 }
 
 .text{
-	font-size: 16px;
-	line-height: (24/16);
+	font-size: 20px;
+	line-height: 1.2;
+
+	p{
+		margin: 0 0 1em;
+		&:last-child{
+			margin-bottom: 0;
+		}
+	}
 }

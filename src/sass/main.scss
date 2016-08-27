@@ -1,16 +1,320 @@
 @charset "UTF-8";
 /* ==========================================================================
- * Layout
+ * container
  * ========================================================================== */
 
-.body-container{
+.container{
+	color: $text;
 	overflow: hidden;
 	position: relative;
+	background: #fff url(../img/bg.png) 0 0 repeat;
+
+	font-family: $mainFontFamily;
+	font-size: 16px;
+	line-height: 1.2;
+
+	padding: 0 0 150px;
+
+	*, *:before, *:after{
+		box-sizing: border-box;
+	}
+
+	&__section{
+	}
+}
+
+.section{
+
+	&__wrap{
+		@include clearfix;
+		width: 1278px;
+		padding: 25px 70px;
+		margin: auto;
+	}
 }
 
 /* ==========================================================================
- * main
+ * seagate-logo
  * ========================================================================== */
 
+.seagate-logo{
+	text-align: left;
+	text-indent: -9999px;
+	display: inline-block;
 
- 
+	@include icons('seagate-logo');
+}
+
+/* ==========================================================================
+ * home
+ * ========================================================================== */
+
+.home{
+
+	&__wrap{
+		background: #2c1e2b url(../img/bg-home.jpg) 50% 0 no-repeat;
+		color: #fff;
+		padding-top: 44px;
+
+		min-height: image-height('../assets/img/bg-home.jpg');		
+	}
+
+	&__logo{
+		height: 100px;
+		text-align: center;
+		margin: 0 0 336px;
+	}
+
+	&__title{
+		font-size: 30px;
+		line-height: 1;
+		font-weight: 300;
+		border-bottom: 1px solid #8c8c8c;
+		padding: 0 335px 25px 0;
+		margin: 0 0 50px;
+		position: relative;
+		text-transform: uppercase;
+		&:after{
+			content: '';
+			position: absolute;
+			right: -9px;
+			bottom: -30px;
+			@include icons('many-hdd');
+		}
+	}
+
+	&__form{
+		
+	}
+}
+
+.home-form{
+
+	&__title{
+		font-size: 43px;
+		font-weight: 100;
+		margin: 0 0 30px;
+		text-align: center;
+		text-transform: uppercase;
+		color: $green;
+	}
+
+	&__form{
+		text-align: center;
+		margin: 0 0 -15px;
+	}
+
+	&__input-placeholder{
+		display: inline-block;
+		vertical-align: top;
+		width: 222px;
+		margin: 0 1px 15px;
+	}
+
+	&__button-placeholder{
+		display: inline-block;
+		vertical-align: top;
+		width: 294px;
+		margin: 0 1px 15px;
+	}
+
+	&__input{
+		background: transparent;
+		border: 1px solid #b7b7b7;
+		color: #b7b7b7;
+		font-size: 20px;
+		line-height: 54px;
+		height: 54px;
+	}
+
+	&__button{
+		font-size: 20px;
+		line-height: 54px;
+		height: 54px;
+	}
+}
+
+/* ==========================================================================
+ * about
+ * ========================================================================== */
+
+.about{
+
+	&__wrap{
+		padding: 25px 0;
+	}
+
+	&__text{
+		text-align: justify;
+		font-size: 41px;
+		font-weight: 400;
+	}
+}
+
+
+/* ==========================================================================
+ * info
+ * ========================================================================== */
+
+.info{
+
+ 	&__wrap{
+ 		background: #d0d0df;
+ 		padding-top: 50px;
+ 		padding-bottom: 60px;
+ 	}
+
+ 	&__top{
+ 		margin: 0 0 40px;
+ 	}
+
+ 	&__bottom{
+ 		@include clearfix;
+ 	}
+
+ 	&__features{
+ 		float: left;
+ 		width: 460px;
+ 		margin: 30px 0 0;
+ 		font-weight: 700;
+ 	}
+
+ 	&__text{
+ 		text-align: justify;
+ 	}
+
+ 	&__video{
+ 		float: right;
+ 		width: 640px;
+ 	}
+}
+
+/* ==========================================================================
+ * guardians
+ * ========================================================================== */
+
+.guardians{
+	
+	&:after{
+		content: '';
+		display: block;
+		margin: 0 auto;
+		@include icons('bottom');
+	}
+
+	&__wrap{
+		background: #110410;
+		padding: 0 0 41px;
+	}
+
+	&__top{
+		@include clearfix;
+		@include icons('guradians-top');
+		padding: 30px 70px 0;
+		color: #fff; 
+		z-index: 10;
+		position: relative;
+	}
+
+	&__slider{
+		margin: -30px 0 0;
+	}
+
+	&__title{
+		font-size: 30px;
+		font-weight: 400;
+		float: left;
+		width: 425px;
+		margin: 70px 0 0;
+	}
+
+	&__list{
+		@include list;
+		float: right;
+		width: 700px;
+		text-align: right;
+	}
+
+	&__item{
+		display: inline-block;
+		vertical-align: bottom;
+		margin: 0 0 0 100px;
+		&:first-child{
+			margin-left: 0;
+		}
+	}
+
+	&__href{
+		text-indent: -9999px;
+		display: block;
+		text-align: left;
+
+		&--barracuda{
+			@include icons('barracuda');
+		}
+
+		&--ironwolf{
+			@include icons('ironwolf');
+		}
+
+		&--skyhawk{
+			@include icons('skyhawk');
+		}
+	}
+	
+}
+
+.guardians-slider{
+
+	&__list{
+		@include list;
+	}
+
+	&__item{
+		
+	}
+}
+
+.guardians-slide{
+	padding: 55px 0 0 225px;
+	height: 248px;
+
+	&--barracuda{
+		background: #c8cada url(../img/bg-barracuda.jpg) 50% 0 no-repeat;
+		color: #000;
+	}
+
+	&--ironwolf{
+		background: #000000 url(../img/bg-ironwolf.jpg) 50% 0 no-repeat;
+		color: #fff;
+	}
+
+	&--skyhawk{
+		background: #b9bbca url(../img/bg-skyhawk.jpg) 50% 0 no-repeat;
+		color: #000;
+	}
+
+	&__title{
+		color: $green;
+		margin: 0 0 10px;
+		font-size: 30px;
+		font-weight: 400;
+	}
+
+	&__text{
+		width: 470px;
+		font-size: 14px;
+		margin: 0 0 15px;
+		text-align: justify;
+		font-weight: 100;
+	}
+
+	&__button{
+		padding: 5px 20px;
+		border-radius: 5px;
+		color: #fff!important;
+		font-size: 16px;
+	}
+
+
+}
