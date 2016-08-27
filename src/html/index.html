@@ -1,8 +1,5 @@
-@@include("./common/head.html", {
-	"title": "TITLE"
-})
+@@if (mode === 'dev'){@@include("./common/head-u.html", {})}
 
-			@@include("./pages/home.html", {})
+@@include("./pages-prefixed/home.html", {})
 
-
-@@include("./common/foot.html", {})
+@@if (mode === 'dev'){@@include("./common/foot-u.html", {})}

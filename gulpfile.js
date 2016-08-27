@@ -10,7 +10,7 @@ var devMode = process.env.NODE_ENV || 'dev';
 
 var destFolder = devMode === 'dev' ? 'dev' : 'production';
 
-var cssPrefix = 'fnlasdnf-';
+var cssPrefix = 'p08w-';
 
 // STYLES
 gulp.task('sass', function () {
@@ -41,6 +41,7 @@ gulp.task('assets', function(){
 
 var postHtmlPlugins = [
 	function prefixClass(tree) {
+		console.log(tree.match);
 		tree.match({attrs: { class: /.+/ }}, function (node) {
 			
 			var classes = node.attrs.class.split(' ');	
@@ -62,7 +63,18 @@ var postHtmlPlugins = [
 	},	
 ];
 
-gulp.task('html', function(callback){
+gulp.task('html-prefix', function(callback){
+	
+	return gulp.src([
+		'src/html/pages/*.html', 
+	])
+	.pipe(posthtml(postHtmlPlugins))
+	.on('error', $.notify.onError())
+	.pipe(gulp.dest('src/html/pages-prefixed'));
+
+});
+
+gulp.task('html-final', function(callback){
 	
 	return gulp.src([
 		'src/html/*.html', 
@@ -71,15 +83,29 @@ gulp.task('html', function(callback){
 		prefix: '@@',
 		basepath: '@file',
 		context: {
+			mode: devMode,
 		},
 		indent: true
 	}))
 	.on('error', $.notify.onError())
+	.pipe(gulp.dest(destFolder));
+
+});
+
+
+
+gulp.task('html-prod', function(callback){
+	
+	return gulp.src([
+		'src/html/pages/*.html', 
+	])
 	.pipe(posthtml(postHtmlPlugins))
 	.on('error', $.notify.onError())
 	.pipe(gulp.dest(destFolder));
 
 });
+
+gulp.task('html', gulp.series('html-prefix', 'html-final'));
 
 
 // JS
@@ -117,13 +143,15 @@ gulp.task('clean', function(callback) {
 
 gulp.task('build', gulp.series('assets', 'sass', 'html'));
 
+gulp.task('build-prod', gulp.series('assets', 'sass', 'html-prod'));
+
 
 //PUBLIC TASKS
 
 //production
 
 // npm run prod - build whole project to deploy in 'production' folder
-gulp.task('prod', gulp.series('clean', 'build'));
+gulp.task('prod', gulp.series('clean', 'build-prod'));
 
 
 //development

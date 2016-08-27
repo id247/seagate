@@ -1,6 +1,5 @@
-'use strict';
-
-export default (function App(window, document, $){
+;(function App(window, document, $){
+	'use strict';
 	console.log('run');
 
 	var maxHeight = 650;
@@ -170,6 +169,6 @@ export default (function App(window, document, $){
 
 	$(document).ready(function() {
 		init();
-	}
+	});
 
 })(window, document, jQuery, undefined);
