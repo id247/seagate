@@ -1,5 +1,3 @@
-@@if (mode === 'dev'){@@include("./common/head-u.html", {})}
-
-@@include("./pages-prefixed/index.html", {})
-
-@@if (mode === 'dev'){@@include("./common/foot-u.html", {})}
+@@include('./common/head.html')
+	@@include('./pages/home.html')
+@@include('./common/foot.html')

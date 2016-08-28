@@ -71,18 +71,7 @@ var postHtmlPlugins = [
 	},	
 ];
 
-gulp.task('html-prefix', function(callback){
-	
-	return gulp.src([
-		'src/html/pages/*.html', 
-	])
-	.pipe(posthtml(postHtmlPlugins))
-	.on('error', $.notify.onError())
-	.pipe(gulp.dest('src/html/pages-prefixed'));
-
-});
-
-gulp.task('html-final', function(callback){
+gulp.task('html', function(callback){
 	
 	return gulp.src([
 		'src/html/*.html', 
@@ -96,24 +85,22 @@ gulp.task('html-final', function(callback){
 		indent: true
 	}))
 	.on('error', $.notify.onError())
-	.pipe(gulp.dest(destFolder));
-
-});
-
-
-
-gulp.task('html-prod', function(callback){
-	
-	return gulp.src([
-		'src/html/pages/*.html', 
-	])
 	.pipe(posthtml(postHtmlPlugins))
 	.on('error', $.notify.onError())
 	.pipe(gulp.dest(destFolder));
 
 });
 
-gulp.task('html', gulp.series('html-prefix', 'html-final'));
+gulp.task('html-ulmart', function(callback){
+	var ulmart = './src/html/ulmart';
+	return gulp.src([
+		ulmart + '/head.html', 
+		destFolder + '/index.html', 
+		ulmart + '/foot.html'
+	])
+    .pipe($.concat('ulmart.html'))
+    .pipe(gulp.dest(destFolder));
+});
 
 
 // JS
@@ -141,7 +128,7 @@ gulp.task('watch', function(){
 	gulp.watch('src/sass/**/*.scss', gulp.series('sass'));
 	gulp.watch('src/assets/**/*', gulp.series('assets'));
 	gulp.watch('src/js/**/*.js', gulp.series('js'));
-	gulp.watch(['src/html/**/*.html', '!src/html/pages-prefixed/*'], gulp.series('html'));
+	gulp.watch('src/html/**/*.html', gulp.series('html', 'html-ulmart'));
 });
 
 gulp.task('clean', function(callback) {
@@ -149,9 +136,9 @@ gulp.task('clean', function(callback) {
 	return $.del([destFolder]);
 });
 
-gulp.task('build', gulp.series('assets', 'js', 'sass', 'html'));
+gulp.task('build', gulp.series('assets', 'js', 'sass', 'html', 'html-ulmart'));
 
-gulp.task('build-prod', gulp.series('assets', 'js', 'sass', 'html-prod'));
+gulp.task('build-prod', gulp.series('assets', 'js', 'sass', 'html'));
 
 
 //PUBLIC TASKS

@@ -10,6 +10,7 @@
     "gulp-autoprefixer": "latest",
     "gulp-babel": "latest",
     "gulp-buffer": "latest",
+    "gulp-concat": "^2.6.0",
     "gulp-css-image-dimensions": "latest",
     "gulp-css-prefix": "^0.1.0",
     "gulp-file-include": "latest",
