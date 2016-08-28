@@ -53,54 +53,68 @@
 
 	function form(){		
 
-		$('form').each( function(){
+		var $form = $('#' + cssPrefix + 'form');
+		var $button = $form.find('button[type="submit"]');
+		var $inputs = $form.find('input');
 
-			const $form = $(this);
-			const $button = $form.find('button[type="submit"]');
-			const $success = $form.find('.order-form__success');
+		var $message = $('#' + cssPrefix + 'form-message');
+
+		$message.hide();
+
+		function validation(){
+			var isValid = true;
+			var errorClass = cssPrefix + 'home-form__input--error';
 			
-			$success.hide();
+			var $name = $inputs.filter('[name="name"]');
+			var $tel = $inputs.filter('[name="tel"]');
 
-	
-
-			$form.on('submit', function(e){
-
-				e.preventDefault();
-
-				const form = e.target;
-
-				if ( !$(form).valid() ){
-					return false;
+			$inputs.each(function(){
+				var $this = $(this);
+				if ($this.val().length === 0){
+					$this.addClass(errorClass);
+					isValid = false;
+				}else{
+					$this.removeClass(errorClass);
 				}
-
-				$button.text('Отправка данных...');
-				$button.attr('disabled', true);
-
-				$.ajax({
-					url: $form.attr('action'), 
-				    method: 'POST',
-				    data: $form.serialize(),
-				    dataType: 'json',
-				    success: function( response ) {
-				    	console.log(response);
-						$success.html('Спасибо! Ваша заявка была успешно отправлена!');
-						$success.removeClass('order-form__success--error');	
-				    },
-				    error: function(xhr, ajaxOptions, error){
-				    	console.log('Data could not be saved.' + error.message);
-						$success.addClass('order-form__success--error');
-						$success.html('Ошибка сохранения данных, попробуйте еще раз. Если ошибка повторится - свяжитесь с нами.');
-
-				    },
-				    complete: function(){					    	
-				    	$success.show();
-						$button.attr('disabled', false).text('Отправить заявку');			    	
-				    }
-				});				
-				
-				
-
 			});
+
+			return isValid;
+		}
+
+		$inputs.on('keyup change', validation);
+
+		$form.on('submit', function(e){
+
+			e.preventDefault();
+
+			if ( !validation() ){
+				return false;
+			}
+
+			$button.text('Отправка данных...');
+			$button.attr('disabled', true);
+
+			$.ajax({
+				url: $form.attr('action'), 
+			    method: 'POST',
+			    data: $form.serialize(),
+			    dataType: 'json',
+			    success: function( response ) {
+			    	console.log(response);
+					$message.html('Спасибо! Ваша заявка была успешно отправлена!');
+			    },
+			    error: function(xhr, ajaxOptions, error){
+			    	console.log('Data could not be saved.' + error.message);
+					$message.html('Ошибка сохранения данных, попробуйте еще раз. Если ошибка повторится - свяжитесь с нами.');
+			    },
+			    complete: function(){					    	
+			    	$message.show();
+					$button.attr('disabled', false).text('Отправить заявку');			    	
+			    }
+			});				
+			
+			
+
 		});
 
 	}

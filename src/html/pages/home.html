@@ -24,7 +24,7 @@
 					и мы уведомим вас о поступлении
 				</div><!-- /.home-form__title -->
 
-				<form action="#" class="home-form__form form">
+				<form action="#" class="home-form__form form" id="form" method="post">
 					
 					<div class="home-form__input-placeholder form__input-placeholder">
 						
@@ -34,17 +34,21 @@
 					
 					<div class="home-form__input-placeholder form__input-placeholder">
 						
-						<input type="text" class="home-form__input form__input" name="name" placeholder="Ваш телефон*" />
+						<input type="tel" class="home-form__input form__input" name="tel" placeholder="Ваш телефон*" />
 
 					</div><!-- /.home-form__input-placeholder -->
 					
 					<div class="home-form__button-placeholder form__button-placeholder">
 						
-						<button class="home-form__button button button--green button--block">УВЕДОМИТЬ МЕНЯ</button>
+						<button type="submit" class="home-form__button button button--green button--block">УВЕДОМИТЬ МЕНЯ</button>
 
 					</div><!-- /.home-form__input-placeholder -->
 
 				</form><!-- /.home-form__form -->
+
+				<div class="home-form__message" id="form-message">
+					
+				</div><!-- /.home-form__message -->
 
 			</div><!-- /.home__form -->
 
@@ -228,6 +232,11 @@
 
 </div><!-- /.container -->
 
+<!-- jquery fallback -->
+<script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
 
+<!-- slider -->
 <script src="js/jquery.bxslider.min.js"></script>
+
+<!-- main script -->
 <script src="js/index.js"></script>

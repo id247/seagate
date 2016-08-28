@@ -24,7 +24,7 @@
 					и мы уведомим вас о поступлении
 				</div><!-- /.home-form__title -->
 
-				<form action="#" class="p08w-home-form__form p08w-form">
+				<form action="#" class="p08w-home-form__form p08w-form" id="p08w-form">
 					
 					<div class="p08w-home-form__input-placeholder p08w-form__input-placeholder">
 						
@@ -34,17 +34,21 @@
 					
 					<div class="p08w-home-form__input-placeholder p08w-form__input-placeholder">
 						
-						<input type="text" class="p08w-home-form__input p08w-form__input" name="name" placeholder="Ваш телефон*">
+						<input type="tel" class="p08w-home-form__input p08w-form__input" name="tel" placeholder="Ваш телефон*">
 
 					</div><!-- /.home-form__input-placeholder -->
 					
 					<div class="p08w-home-form__button-placeholder p08w-form__button-placeholder">
 						
-						<button class="p08w-home-form__button p08w-button p08w-button--green p08w-button--block">УВЕДОМИТЬ МЕНЯ</button>
+						<button type="submit" class="p08w-home-form__button p08w-button p08w-button--green p08w-button--block">УВЕДОМИТЬ МЕНЯ</button>
 
 					</div><!-- /.home-form__input-placeholder -->
 
 				</form><!-- /.home-form__form -->
+
+				<div class="p08w-home-form__message" id="p08w-form-message">
+					
+				</div><!-- /.home-form__message -->
 
 			</div><!-- /.home__form -->
 
@@ -220,6 +224,11 @@
 
 </div><!-- /.container -->
 
+<!-- jquery fallback -->
+<script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
 
+<!-- slider -->
 <script src="js/jquery.bxslider.min.js"></script>
+
+<!-- main script -->
 <script src="js/index.js"></script>

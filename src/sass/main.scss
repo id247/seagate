@@ -125,12 +125,22 @@
 		font-size: 20px;
 		line-height: 54px;
 		height: 54px;
+
+		&--error{
+			border-color: #b82828;
+		}
 	}
 
 	&__button{
 		font-size: 20px;
 		line-height: 54px;
 		height: 54px;
+	}
+
+	&__message{
+		text-align: center;
+		font-weight: 100;
+		padding: 20px 0 0;
 	}
 }
 
