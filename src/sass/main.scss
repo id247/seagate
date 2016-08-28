@@ -68,7 +68,7 @@
 	&__title{
 		font-size: 30px;
 		line-height: 1;
-		font-weight: 300;
+		font-weight: 100;
 		border-bottom: 1px solid #8c8c8c;
 		padding: 0 335px 25px 0;
 		margin: 0 0 50px;
@@ -231,6 +231,7 @@
 	&__list{
 		@include list;
 		float: right;
+		margin: 0 -10px 0 0;
 		width: 700px;
 		text-align: right;
 	}
@@ -238,7 +239,7 @@
 	&__item{
 		display: inline-block;
 		vertical-align: bottom;
-		margin: 0 0 0 100px;
+		margin: 0 0 0 80px;
 		&:first-child{
 			margin-left: 0;
 		}
@@ -248,17 +249,68 @@
 		text-indent: -9999px;
 		display: block;
 		text-align: left;
+		position: relative;
+
+		&:before,
+		&:after{
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		&:before{
+			transition: all .2s;
+			opacity: 0;
+		}
+
+		&:hover,
+		&--active{
+			&:before{
+				opacity: 1;
+			}
+		}
 
 		&--barracuda{
-			@include icons('barracuda');
+
+			width: image-width('../assets/img/barracuda.png');
+			height: image-height('../assets/img/barracuda.png');
+			
+			&:before{
+				@include icons('barracuda-hover');
+			}
+			
+			&:after{
+				@include icons('barracuda');
+			}
 		}
 
 		&--ironwolf{
-			@include icons('ironwolf');
+
+			width: image-width('../assets/img/ironwolf.png');
+			height: image-height('../assets/img/ironwolf.png');
+			
+			&:before{
+				@include icons('ironwolf-hover');
+			}
+			
+			&:after{
+				@include icons('ironwolf');
+			}
 		}
 
 		&--skyhawk{
-			@include icons('skyhawk');
+
+			width: image-width('../assets/img/skyhawk.png');
+			height: image-height('../assets/img/skyhawk.png');
+			
+			&:before{
+				@include icons('skyhawk-hover');
+			}
+			
+			&:after{
+				@include icons('skyhawk');
+			}
 		}
 	}
 	
