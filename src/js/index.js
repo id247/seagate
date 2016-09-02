@@ -55,7 +55,7 @@
 
 		var $form = $('#' + cssPrefix + 'form');
 		var $button = $form.find('button[type="submit"]');
-		var $inputs = $form.find('input');
+		var $inputs = $form.find('input.' + cssPrefix + 'js-required');
 
 		var $message = $('#' + cssPrefix + 'form-message');
 
@@ -66,7 +66,12 @@
 			var errorClass = cssPrefix + 'home-form__input--error';
 			
 			var $name = $inputs.filter('[name="name"]');
-			var $tel = $inputs.filter('[name="tel"]');
+			var $email = $inputs.filter('[name="email"]');
+
+			function validateEmail(email) {
+				var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				return re.test(email);
+			}
 
 			$inputs.each(function(){
 				var $this = $(this);
@@ -77,6 +82,13 @@
 					$this.removeClass(errorClass);
 				}
 			});
+
+			if (!validateEmail($email.val())){
+				isValid = false;
+				$email.addClass(errorClass);
+			}else{
+				$email.removeClass(errorClass);
+			}
 
 			return isValid;
 		}
@@ -99,6 +111,10 @@
 			    method: 'POST',
 			    data: $form.serialize(),
 			    dataType: 'json',
+			    beforeSend: function(jqXHR, settings) {
+			    	console.log(settings);
+			        jqXHR.setRequestHeader('x-csrf-token', null);
+			    },
 			    success: function( response ) {
 			    	console.log(response);
 					$message.html('Спасибо! Ваша заявка была успешно отправлена!');
@@ -119,8 +135,39 @@
 
 	}
 
+	function compare(){
+		var $compare = $('#' + cssPrefix + 'compare');
+		var $compareOpeners = $('.' + cssPrefix + 'js-compare-open');
+
+		var visibleClass = cssPrefix + 'compare--visible';
+
+		function show(){
+			$compare.addClass(visibleClass);
+		}
+
+		function hide(){
+			$compare.removeClass(visibleClass);
+		}
+
+		$compare.on('click', function(e){
+
+			var $target = $(e.target);
+			if ($target.hasClass(cssPrefix + 'js-compare-close')){
+				e.preventDefault();
+				hide();
+			}
+
+		});
+
+		$compareOpeners.on('click', function(e){
+			e.preventDefault();
+			show();
+		});
+	}
+
 	function init(){
 		slider();
+		compare();
 		form();
 	}
 

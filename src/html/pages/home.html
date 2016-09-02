@@ -19,17 +19,20 @@
 				и мы уведомим вас о поступлении
 			</div><!-- /.home-form__title -->
 
-			<form action="#" class="home-form__form form" id="form" method="post">
+			<form action="https://formspree.io/bazhenov87@yandex.ru" class="home-form__form form" id="form" method="post">
+
+				<input type="text" name="_gotcha" class="home-form__antispam" />
+				<input type="hidden" name="_subject" value="Заявка с 'НОВАЯ СЕРИЯ НАКОПИТЕЛЕЙ «СТРАЖИ ДАННЫХ»'" />
 				
 				<div class="home-form__input-placeholder form__input-placeholder">
 					
-					<input type="text" class="home-form__input form__input" name="name" placeholder="Ваше имя*" />
+					<input type="text" class="home-form__input form__input js-required" name="name" placeholder="Ваше имя*" />
 
 				</div><!-- /.home-form__input-placeholder -->
 				
 				<div class="home-form__input-placeholder form__input-placeholder">
 					
-					<input type="tel" class="home-form__input form__input" name="tel" placeholder="Ваш телефон*" />
+					<input type="email" class="home-form__input form__input js-required" name="email" placeholder="Ваш e-mail*" />
 
 				</div><!-- /.home-form__input-placeholder -->
 				
@@ -171,7 +174,7 @@
 
 					<div class="guardians-slide__button-placeholder">
 						
-						<a href="#" class="guardians-slide__button button button--green">Сравнить ></a>
+						<button class="guardians-slide__button button button--green js-compare-open">Сравнить ></button>
 
 					</div><!-- /.guardians-slide__button-placeholder -->
 					
@@ -191,7 +194,7 @@
 
 					<div class="guardians-slide__button-placeholder">
 						
-						<a href="#" class="guardians-slide__button button button--green">Сравнить ></a>
+						<button class="guardians-slide__button button button--green js-compare-open">Сравнить ></button>
 
 					</div><!-- /.guardians-slide__button-placeholder -->
 					
@@ -211,7 +214,7 @@
 
 					<div class="guardians-slide__button-placeholder">
 						
-						<a href="#" class="guardians-slide__button button button--green">Сравнить ></a>
+						<button class="guardians-slide__button button button--green js-compare-open">Сравнить ></button>
 
 					</div><!-- /.guardians-slide__button-placeholder -->
 					
@@ -220,6 +223,22 @@
 			</ul> <!-- end .guardians-slider__list -->
 			
 		</div><!-- /.guardians__slider -->
+
+		<div class="guardians__compare">			
+			
+			<div class="compare js-compare-close" id="compare">			
+
+				<div class="compare__content">
+
+					<button class="compare__close js-compare-close">&times;</button>
+					
+					<img src="img/compare.jpg" alt="" class="compare__image" />
+
+				</div><!-- /.compare__content -->
+			
+			</div><!-- /.guardians -->
+
+		</div><!-- /.guardians__compare -->
 
 	</div><!-- /.guardians__wrap -->
 
