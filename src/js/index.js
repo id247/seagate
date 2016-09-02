@@ -106,15 +106,24 @@
 			$button.text('Отправка данных...');
 			$button.attr('disabled', true);
 
+			console.log($form, this, $form.serialize());
+
+			const data = {
+				name: $form.find('[name="name"]').val(),
+				email: $form.find('[name="email"]').val(),
+				_gotcha: $form.find('[name="_gotcha"]').val(),
+				_subject: $form.find('[name="_subject"]').val(),
+			}
+
 			$.ajax({
 				url: $form.attr('action'), 
 			    method: 'POST',
-			    data: $form.serialize(),
+			    data: data,
 			    dataType: 'json',
-			    beforeSend: function(jqXHR, settings) {
-			    	console.log(settings);
-			        jqXHR.setRequestHeader('x-csrf-token', null);
-			    },
+			    // beforeSend: function(jqXHR, settings) {
+			    // 	console.log(settings);
+			    //     jqXHR.setRequestHeader('x-csrf-token', null);
+			    // },
 			    success: function( response ) {
 			    	console.log(response);
 					$message.html('Спасибо! Ваша заявка была успешно отправлена!');
