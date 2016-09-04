@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+	
+	<style>
+		*, *:before, *:after{
+			box-sizing: border-box;
+		}
+	</style>
+
+	@@include('./common/head.html')
+
+	<style>
+
+		html,
+		body{
+			background: transparent;
+		}
+
+		.container{
+			background: transparent;
+		}
+	</style>
+
+
+</head>
+<body>
+
+	<div class="home-form">
+		
+		<div class="home-form__title">
+			Оставьте контактные данные <br />
+			и мы уведомим вас о поступлении
+		</div><!-- /.home-form__title -->
+
+		<form action="https://formspree.io/bazhenov87@ya.ru" class="home-form__form form" id="form" method="post">
+
+			<input type="text" name="_gotcha" class="home-form__antispam" />
+			<input type="hidden" name="_subject" value="Заявка с 'НОВАЯ СЕРИЯ НАКОПИТЕЛЕЙ «СТРАЖИ ДАННЫХ»'" />
+			
+			<div class="home-form__input-placeholder form__input-placeholder">
+				
+				<input type="text" class="home-form__input form__input js-required" name="name" placeholder="Ваше имя*" />
+
+			</div><!-- /.home-form__input-placeholder -->
+			
+			<div class="home-form__input-placeholder form__input-placeholder">
+				
+				<input type="email" class="home-form__input form__input js-required" name="email" placeholder="Ваш e-mail*" />
+
+			</div><!-- /.home-form__input-placeholder -->
+			
+			<div class="home-form__button-placeholder form__button-placeholder">
+				
+				<button type="submit" class="home-form__button button button--green button--block">УВЕДОМИТЬ МЕНЯ</button>
+
+			</div><!-- /.home-form__input-placeholder -->
+
+		</form><!-- /.home-form__form -->
+
+		<div class="home-form__message" id="form-message">
+			
+		</div><!-- /.home-form__message -->
+
+	</div><!-- /.home__form -->
+
+
+<!-- jquery fallback -->
+<script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+
+<!-- main script -->
+<script src="js/form.js"></script>
+
+</body>
+</html>

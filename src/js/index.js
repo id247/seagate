@@ -24,6 +24,8 @@
 				$hrefs
 				.eq(0)
 				.addClass(activeHferClass);
+
+				setFrameHeight();
 			},
 			onSlideBefore: function($slideElement, oldIndex, newIndex){
 				$hrefs
@@ -46,103 +48,6 @@
 		});	
 	}
 
-
-	/*
-		submit form
-	*/
-
-	function form(){		
-
-		var $form = $('#' + cssPrefix + 'form');
-		var $button = $form.find('button[type="submit"]');
-		var $inputs = $form.find('input.' + cssPrefix + 'js-required');
-
-		var $message = $('#' + cssPrefix + 'form-message');
-
-		$message.hide();
-
-		function validation(){
-			var isValid = true;
-			var errorClass = cssPrefix + 'home-form__input--error';
-			
-			var $name = $inputs.filter('[name="name"]');
-			var $email = $inputs.filter('[name="email"]');
-
-			function validateEmail(email) {
-				var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-				return re.test(email);
-			}
-
-			$inputs.each(function(){
-				var $this = $(this);
-				if ($this.val().length === 0){
-					$this.addClass(errorClass);
-					isValid = false;
-				}else{
-					$this.removeClass(errorClass);
-				}
-			});
-
-			if (!validateEmail($email.val())){
-				isValid = false;
-				$email.addClass(errorClass);
-			}else{
-				$email.removeClass(errorClass);
-			}
-
-			return isValid;
-		}
-
-		$inputs.on('keyup change', validation);
-
-		$form.on('submit', function(e){
-
-			e.preventDefault();
-
-			if ( !validation() ){
-				return false;
-			}
-
-			$button.text('Отправка данных...');
-			$button.attr('disabled', true);
-
-			console.log($form, this, $form.serialize());
-
-			const data = {
-				name: $form.find('[name="name"]').val(),
-				email: $form.find('[name="email"]').val(),
-				_gotcha: $form.find('[name="_gotcha"]').val(),
-				_subject: $form.find('[name="_subject"]').val(),
-			}
-
-			$.ajax({
-				url: $form.attr('action'), 
-			    method: 'POST',
-			    data: data,
-			    dataType: 'json',
-			    // beforeSend: function(jqXHR, settings) {
-			    // 	console.log(settings);
-			    //     jqXHR.setRequestHeader('x-csrf-token', null);
-			    // },
-			    success: function( response ) {
-			    	console.log(response);
-					$message.html('Спасибо! Ваша заявка была успешно отправлена!');
-			    },
-			    error: function(xhr, ajaxOptions, error){
-			    	console.log('Data could not be saved.' + error.message);
-					$message.html('Ошибка сохранения данных, попробуйте еще раз. Если ошибка повторится - свяжитесь с нами.');
-			    },
-			    complete: function(){					    	
-			    	$message.show();
-					$button.attr('disabled', false).text('Отправить заявку');			    	
-			    }
-			});				
-			
-			
-
-		});
-
-	}
 
 	function compare(){
 		var $compare = $('#' + cssPrefix + 'compare');
@@ -176,12 +81,12 @@
 
 	function init(){
 		slider();
-		compare();
-		form();
+		compare();;
 	}
 
 	$(document).ready(function() {
 		init();
 	});
+
 
 })(window, document, jQuery, undefined);
