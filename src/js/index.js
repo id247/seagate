@@ -24,8 +24,6 @@
 				$hrefs
 				.eq(0)
 				.addClass(activeHferClass);
-
-				setFrameHeight();
 			},
 			onSlideBefore: function($slideElement, oldIndex, newIndex){
 				$hrefs
